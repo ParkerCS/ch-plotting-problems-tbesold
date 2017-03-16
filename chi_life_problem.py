@@ -13,4 +13,14 @@
 # Note:  If you would like to present something different than the above for your graph using this dataset, just let me know your intentions before you start and I will do my best to support you.
 
 
+import csv
+import numpy as np
+import matplotlib as plt
 
+file = open("chi_life_expectancy.txt", 'r')
+life = []
+
+reader = csv.reader(file, delimiter='\t')
+for line in reader:
+    life.append(line)
+print(life)
