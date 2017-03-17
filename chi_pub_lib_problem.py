@@ -27,6 +27,7 @@ headers = lib_data[0]   #this makes the heaerds all the stuff in the first categ
 lib_data = lib_data[1:]  #new lib data doesnt include the first part with all the months
 print(lib_data)
 
+'''
 jan = []
 feb = []
 mar = []
@@ -44,7 +45,7 @@ dec = []
 x = [jan, feb, mar, apr, may, jun, july, aug, sep, oct, nov, dec]
 
 
-'''
+
 for i in range(0, len(lib_data)):
     x[0].append(lib_data[i][1])
     feb.append(lib_data[i][2])
@@ -62,12 +63,12 @@ for i in range(0, len(lib_data)):
 print(jan)
 '''
 
-totals = []
+totals = []     #list of total visitors for each motnh
 
 for month in range(12):
     total = 0
     for i in range(len(lib_data)):
-        total += int(lib_data[i][month + 1])
+        total += int(lib_data[i][month + 1])        #going through and getting totals for each month
     totals.append(total)
 print(totals)
 
@@ -75,30 +76,30 @@ print(totals)
 for i in range(len(lib_data)):
     lib_data[i][-1] = int(lib_data[i][-1])
 
-lib_data.sort(key=itemgetter(-1))
+lib_data.sort(key=itemgetter(-1))             #sorting by ytd
 
 graph_list = []
-most_visited = lib_data[-3:]
+most_visited = lib_data[-3:]  #getting top 3 ytd
 print(most_visited)
 graph_list.append(most_visited)
-graph_list.append(totals)
+graph_list.append(totals)       #adding the top 3 most visited plus the totals to a list
 print(graph_list)
 
 
 import matplotlib.pyplot as plt
 import numpy as np
 
-headers = headers[1:13]
+headers = headers[1:13]   # making headers just jan through dec
 x_graph = headers
 y_graph = (totals)
 print(headers)
 
 #plt.plot(np.arange(len(y_graph)), y_graph)
 
-plt.xticks(np.arange(len(y_graph)), x_graph, rotation = 65)
+plt.xticks(np.arange(len(y_graph)), x_graph, rotation = 65, size = 5)  #size or fontsize to change the size
 
 
-
+#plotting
 total, = plt.plot(np.arange(len(y_graph)), graph_list[1], '--')
 most, = plt.plot(np.arange(len(y_graph)), graph_list[0][2][1:13], '--')
 second, = plt.plot(np.arange(len(y_graph)), graph_list[0][1][1:13], '--')
@@ -111,7 +112,7 @@ third.set_color('blue')
 
 
 total_patch = mpatches.Patch(color = 'green', label = 'total visitors')
-most_patch = mpatches.Patch(color = 'red', label = graph_list[0][2][0])
+most_patch = mpatches.Patch(color = 'red', label = graph_list[0][2][0])   #taking the name of each library
 second_patch = mpatches.Patch(color = 'orange', label = graph_list[0][1][0])
 third_patch = mpatches.Patch(color = 'blue', label = graph_list[0][0][0])
 
@@ -123,5 +124,4 @@ plt.title("Library Visitors")
 
 
 plt.show()
-
 
